@@ -98,6 +98,45 @@ justify-content:center;text-align:center}
 justify-content:center;z-index:9;padding:20px}
 .lb img{max-width:100%;max-height:92vh;border:2px solid #fff}
 .lb.on{display:flex}
+/* Phones. The band will open this from a text message, so on a narrow
+   screen the page becomes one column with the music first: the blurb and
+   the player lead, the profile furniture follows. Type and tap targets grow
+   to phone size; the MySpace look stays. The player's controls stick to the
+   top of the screen while the tracklist scrolls under them, instead of the
+   list scrolling inside a box - nested scrolling is miserable on a phone. */
+@media (max-width:700px){
+body{font-size:14px}
+.top{font-size:11px}.top span{float:none;display:block}
+.nav{white-space:nowrap;overflow-x:auto;font-size:12px;padding:6px 10px}
+.page{padding:10px;border:0}
+.hdr{font-size:24px}.tag{font-size:12px}
+.cols{flex-direction:column;gap:0}
+.l{width:auto;order:2}.r{order:1;width:100%}
+.mod>h3{font-size:13px;padding:6px 8px}
+.mod>div{padding:10px}
+table.kv{font-size:13px}table.kv td.k{width:100px}
+.ct{font-size:12px}.ct span{padding:8px}
+.blurb{font-size:14px;line-height:1.55}
+.player .now{position:sticky;top:0;z-index:2;background:#111;padding:10px}
+.player .t1{font-size:16px}.player .t2{font-size:12px}
+.bar{height:48px;margin:10px 0 8px}
+.ctl{font-size:13px;gap:10px}
+.ctl button{width:52px;height:44px;font-size:18px}
+.ctl span[style]{display:none}
+.pl{max-height:none;overflow:visible}
+.pl table{font-size:14px}
+.pl td{padding:12px 8px}
+.pl .s{font-size:12px}
+.sess{font-size:11px;padding:6px 8px}
+.shows td{font-size:13px}.shows .dt{width:auto}
+.shows img{width:64px}
+.gal{grid-template-columns:repeat(3,1fr)}
+.demo{font-size:13px}
+.fine{font-size:12px}
+.cmt .who{font-size:13px}.cmt .when{font-size:12px}
+.cmt .av{width:44px;height:44px}
+.foot{font-size:12px}
+}
 </style></head><body><div class="top"><b>trieste</b> &nbsp;a place for tapes<span>reconstructed from the archive, 2026-09-23</span></div><div class="nav"><a href="#">Home</a><a href="#">Browse</a><a href="#">Search</a><a href="#">Invite</a><a href="#">Mail</a><a href="#">Blog</a><a href="#">Favorites</a><a href="#">Forum</a><a href="#">Groups</a><a href="#">Events</a><a href="#">Music</a><a href="#">Comedy</a><a href="#">Classifieds</a></div><div class="page"><div class="hdr">Trieste</div><div class="tag">Seattle, Washington &nbsp;·&nbsp; 55 recordings on tape &nbsp;·&nbsp; 6.2 hours &nbsp;·&nbsp; profile last updated 2/24/2008</div><div class="cols"><div class="l"><div class="pic"><img src="img/Bathyscaphe_Trieste.jpg" alt="Bathyscaphe Trieste"></div><div class="cap">The bathyscaphe <i>Trieste</i> - the profile picture, saved 5/13/2007</div><div class="mod" style="margin-top:10px"><h3>TRIESTE IS IN YOUR EXTENDED NETWORK</h3><div><b>Last login:</b> 2/24/2008<br><b>Status:</b> broken up since 2008<br><b>Here for:</b> being found again<br><b>Last recording on tape:</b> 2/17/2008</div></div><div class="mod"><h3>CONTACTING TRIESTE</h3><div class="ct"><span>Send Message</span><span>Forward to Friend</span><span>Add to Friends</span><span>Add to Favorites</span><span>Instant Message</span><span>Block User</span><span>Add to Group</span><span>Rank User</span></div><div class="fine" style="padding:6px">Every button here has been dead since 2008. The music below is not.</div></div><div class="mod"><h3>TRIESTE'S URL</h3><div><a href="#">www.myspace.com/thetrieste</a><br><a href="#">thetrieste@yahoo.com</a><div class="fine">Both printed on the demo sleeve. The profile itself is gone.</div></div></div><div class="mod"><h3>BAND DETAILS</h3><div><table class="kv"><tr><td class="k">Members</td><td>Jonathan Hudak - bass, vox, artwork<br>Benny Phanichkul - drums<br>Preston Hillman - guitar, synth, percussion</td></tr><tr><td class="k">Active</td><td>2006-2008</td></tr><tr><td class="k">Label</td><td>None. Unsigned.</td></tr><tr><td class="k">Sounds like</td><td><span style="color:#888">&quot;post-punk rockers&quot; - Jonathan, in an email</span></td></tr><tr><td class="k">Tempo</td><td>median 144 BPM</td></tr><tr><td class="k">Key</td><td>most often F</td></tr></table></div></div></div><div class="r"><div class="mod"><h3>TRIESTE'S BLURBS</h3><div class="blurb"><p><b>About Trieste:</b> Three people in a room in Seattle between 2006 and 2008, recorded onto an
 Edirol R-09 that was left running. 130 of those recordings survive, plus four
 show flyers, ten photographs and a demo sleeve. The band&#x27;s last show is
@@ -132,7 +171,9 @@ bottom.</div></div></div><div class="mod"><h3>TRIESTE'S PICS</h3><div><div class
    document.querySelectorAll('.pl tr').forEach(function(r){
      r.classList.toggle('on',r.dataset.i==i);});
    peaks();if(play)a.play();}
- document.querySelectorAll('.pl tr[data-i]').forEach(function(r){
+ // Every row that names a track plays it - the tapes, the last show, and
+ // the demo tracklist, which is not inside a .pl and was missed once.
+ document.querySelectorAll('tr[data-i]').forEach(function(r){
    r.onclick=function(){load(+r.dataset.i,true);};});
  document.querySelector('.pp').onclick=function(){a.paused?a.play():a.pause();};
  document.querySelector('.pv').onclick=function(){load(i-1,!a.paused);};
