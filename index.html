@@ -111,7 +111,11 @@ body{font-size:14px}
 .page{padding:10px;border:0}
 .hdr{font-size:24px}.tag{font-size:12px}
 .cols{flex-direction:column;gap:0}
-.l{width:auto;order:2}.r{order:1;width:100%}
+/* The left column dissolves so its pieces can be ordered one by one: the
+   bathyscaphe stays on top as the header picture (Preston, 2026-09-23),
+   then the music, then the rest of the profile. */
+.l{display:contents}.l>*{order:2}.l>.pic,.l>.cap{order:0}
+.l>.cap{margin-bottom:10px}.r{order:1;width:100%}
 .mod>h3{font-size:13px;padding:6px 8px}
 .mod>div{padding:10px}
 table.kv{font-size:13px}table.kv td.k{width:100px}
